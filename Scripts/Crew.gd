@@ -1,6 +1,7 @@
 extends Node2D
 
 export (PackedScene) var Bullet_line
+export (PackedScene) var Blood_splatter
 
 var speed = 200.0
 var path = PoolVector2Array() setget set_path
@@ -38,7 +39,7 @@ func shoot():
 	b.global_position = global_position
 	b.show_line(bulletpath)
 	
-	current_target.damage(0)
+	current_target.damage(1)
 	shot_ready = false
 	$Reload_timer.start()
 
@@ -79,6 +80,9 @@ func enemy_in_range(enemy):
 		change_state("shoot")
 		
 func damage(damage_done):
+	var b = Blood_splatter.instance() 
+	get_parent().add_child(b)
+	b.global_position = global_position
 	health -= damage_done
 	if health <= 0:
 		change_state("die")
@@ -100,7 +104,7 @@ func _on_Enemies_enemy_dead(enemy):
 func _on_Body_area_input_event(viewport, event, shape_idx):
 	if !event.is_pressed():
 		return
-	if event.button_index != BUTTON_LEFT:
+	if event.button_index != BUTTON_RIGHT:
 		get_parent().set_selected_character(self)
 
 func _on_Crew_sprite_animation_finished():

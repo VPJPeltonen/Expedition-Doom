@@ -1,12 +1,14 @@
 extends Node2D
 
+export (PackedScene) var Blood_splatter
+
 onready var pathfinding = get_parent().get_parent()
 
 var health = 3
 var state
 var target
 var current_target
-var speed = 200.0
+var speed = 150.0
 var path = PoolVector2Array() setget set_path
 var attack_ready = true
 
@@ -14,8 +16,6 @@ func _ready():
 	change_state("default")
 
 func _process(delta):
-	print(state)
-	#print(path.size())
 	match state: 
 		"default":
 			target = get_parent().get_closest_target(self)
@@ -75,6 +75,9 @@ func move_along_path(dist):
 		path.remove(0)
 				
 func damage(damage_done):
+	var b = Blood_splatter.instance() 
+	get_parent().add_child(b)
+	b.global_position = global_position
 	health -= damage_done
 	if health <= 0:
 		change_state("die")

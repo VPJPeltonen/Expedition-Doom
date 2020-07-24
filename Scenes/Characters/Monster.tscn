@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/Thing.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Sprite Frames/thing_spriteframes.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Scripts/Thing_attack_range.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Effects/Monster_blood_splatter.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 17.616
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 3.95618
+height = 5.95596
+
+[node name="Monster" type="Node2D"]
+position = Vector2( 803.109, 382.268 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 1 )
+Blood_splatter = ExtResource( 4 )
+
+[node name="Monster_sprite" type="AnimatedSprite" parent="."]
+z_index = 1
+frames = ExtResource( 2 )
+animation = "attack"
+playing = true
+
+[node name="Attack_range" type="Area2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack_range"]
+shape = SubResource( 1 )
+
+[node name="Body_area" type="Area2D" parent="." groups=[
+"creature",
+"thing",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body_area"]
+position = Vector2( 0.25, 0 )
+shape = SubResource( 2 )
+
+[node name="Reload_timer" type="Timer" parent="."]
+one_shot = true
+[connection signal="animation_finished" from="Monster_sprite" to="." method="_on_Monster_sprite_animation_finished"]
+[connection signal="area_shape_entered" from="Attack_range" to="Attack_range" method="_on_Attack_range_area_shape_entered"]
+[connection signal="area_shape_exited" from="Attack_range" to="Attack_range" method="_on_Attack_range_area_shape_exited"]
+[connection signal="timeout" from="Reload_timer" to="." method="_on_Reload_timer_timeout"]
