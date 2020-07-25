@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Tile Sets/snow_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Characters/Crew.tscn" type="PackedScene" id=2]
@@ -6,7 +6,9 @@
 [ext_resource path="res://Scenes/Characters/Monster.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/Camera_controller.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scripts/Enemies.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Characters/Sick_crewman.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scripts/Player_characters.gd" type="Script" id=10]
 
 [node name="Node2D" type="Node2D"]
@@ -26,27 +28,45 @@ tile_data = PoolIntArray( -720857, 1, 0, -589838, 7, 0, -589837, 7, 0, -589836, 
 
 [node name="Enemies" type="Node2D" parent="Pathfinder"]
 script = ExtResource( 8 )
+monster = ExtResource( 4 )
 
-[node name="Monster" parent="Pathfinder/Enemies" instance=ExtResource( 4 )]
-position = Vector2( -187.231, 1056.83 )
+[node name="Spawn_points" type="Node2D" parent="Pathfinder/Enemies"]
 
-[node name="Monster2" parent="Pathfinder/Enemies" instance=ExtResource( 4 )]
-position = Vector2( -152.77, 892.763 )
+[node name="Position2D" type="Position2D" parent="Pathfinder/Enemies/Spawn_points"]
+position = Vector2( -776, -528 )
 
-[node name="Monster3" parent="Pathfinder/Enemies" instance=ExtResource( 4 )]
-position = Vector2( -74.8587, 1006.63 )
+[node name="Position2D2" type="Position2D" parent="Pathfinder/Enemies/Spawn_points"]
+position = Vector2( -793.959, 693.239 )
 
-[node name="Monster4" parent="Pathfinder/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 2819.04, 748.502 )
+[node name="Position2D3" type="Position2D" parent="Pathfinder/Enemies/Spawn_points"]
+position = Vector2( -758.041, 1788.76 )
 
-[node name="Monster5" parent="Pathfinder/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 2903.69, 890.092 )
+[node name="Position2D4" type="Position2D" parent="Pathfinder/Enemies/Spawn_points"]
+position = Vector2( -695.183, 3027.96 )
 
-[node name="Monster6" parent="Pathfinder/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 2536.08, 2123.84 )
+[node name="Position2D5" type="Position2D" parent="Pathfinder/Enemies/Spawn_points"]
+position = Vector2( 364.421, 3045.92 )
 
-[node name="Monster7" parent="Pathfinder/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 1525.81, 870.745 )
+[node name="Position2D6" type="Position2D" parent="Pathfinder/Enemies/Spawn_points"]
+position = Vector2( 1765.25, 3072.86 )
+
+[node name="Position2D7" type="Position2D" parent="Pathfinder/Enemies/Spawn_points"]
+position = Vector2( 2995.47, 3063.88 )
+
+[node name="Position2D8" type="Position2D" parent="Pathfinder/Enemies/Spawn_points"]
+position = Vector2( 2995.47, 1941.42 )
+
+[node name="Position2D9" type="Position2D" parent="Pathfinder/Enemies/Spawn_points"]
+position = Vector2( 3031.39, 612.422 )
+
+[node name="Position2D10" type="Position2D" parent="Pathfinder/Enemies/Spawn_points"]
+position = Vector2( 3013.43, -510.04 )
+
+[node name="Position2D11" type="Position2D" parent="Pathfinder/Enemies/Spawn_points"]
+position = Vector2( 1980.77, -528 )
+
+[node name="Position2D12" type="Position2D" parent="Pathfinder/Enemies/Spawn_points"]
+position = Vector2( 490.136, -519.02 )
 
 [node name="Player_characters" type="Node2D" parent="Pathfinder"]
 script = ExtResource( 10 )
@@ -60,7 +80,96 @@ position = Vector2( 1366.33, 1208.79 )
 [node name="Crew3" parent="Pathfinder/Player_characters" instance=ExtResource( 2 )]
 position = Vector2( 1360.66, 1280.6 )
 
+[node name="Sick_crew" type="Node2D" parent="Pathfinder/Player_characters"]
+
+[node name="Sick_crewman" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+frame = 0
+
+[node name="Sick_crewman2" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1585.79, 1591.28 )
+frame = 0
+
+[node name="Sick_crewman4" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1158.68, 1640.42 )
+frame = 0
+
+[node name="Sick_crewman5" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1129.7, 1593.8 )
+frame = 0
+
+[node name="Sick_crewman6" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1110.8, 1520.73 )
+frame = 0
+
+[node name="Sick_crewman7" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1173.8, 1485.45 )
+frame = 0
+
+[node name="Sick_crewman8" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1110.8, 1426.23 )
+frame = 0
+
+[node name="Sick_crewman9" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1181.36, 1385.92 )
+frame = 0
+
+[node name="Sick_crewman10" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1593.35, 1141.49 )
+frame = 0
+
+[node name="Sick_crewman11" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1595.87, 1183.07 )
+frame = 0
+
+[node name="Sick_crewman12" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1597.13, 1233.47 )
+frame = 0
+
+[node name="Sick_crewman13" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1602.17, 1285.12 )
+frame = 0
+
+[node name="Sick_crewman14" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1585.79, 1321.66 )
+frame = 0
+
+[node name="Sick_crewman15" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1375.57, 775.078 )
+frame = 0
+
+[node name="Sick_crewman16" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1309.98, 768.351 )
+frame = 0
+
+[node name="Sick_crewman17" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1306.62, 823.85 )
+frame = 0
+
+[node name="Sick_crewman18" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1382.3, 864.213 )
+frame = 0
+
+[node name="Sick_crewman19" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1173.75, 785.169 )
+frame = 0
+
+[node name="Sick_crewman20" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1151.89, 845.713 )
+frame = 0
+
+[node name="Sick_crewman21" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1409.21, 642.216 )
+frame = 0
+
+[node name="Sick_crewman3" parent="Pathfinder/Player_characters/Sick_crew" instance=ExtResource( 9 )]
+position = Vector2( 1539.13, 1643.61 )
+frame = 0
+
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 1366.98, 1186.28 )
+position = Vector2( 1382.17, 1216.4 )
 current = true
 script = ExtResource( 5 )
+
+[node name="UI" parent="Camera2D" instance=ExtResource( 7 )]
+follow_viewport_enable = false
+[connection signal="start_game" from="Camera2D/UI" to="Pathfinder/Enemies" method="_on_UI_start_game"]

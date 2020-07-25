@@ -2,6 +2,7 @@ extends Node2D
 
 onready var selected_character = $Crew
 onready var characters = [$Crew,$Crew2,$Crew3]
+onready var sick_characters = $Sick_crew.get_children()
 
 func _ready():
 	selected_character.select(true)
@@ -20,6 +21,12 @@ func get_closest_character(from):
 		if temp_dist < dist:
 			dist = temp_dist
 			closest_char = crewman
+	sick_characters = $Sick_crew.get_children()
+	for sick_crewman in sick_characters:
+		var temp_dist = from.global_position.distance_to(sick_crewman.global_position)
+		if temp_dist < dist:
+			dist = temp_dist
+			closest_char = sick_crewman		
 	return closest_char
 
 func crewman_dead(crewman):

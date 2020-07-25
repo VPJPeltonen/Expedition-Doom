@@ -16,7 +16,7 @@ height = 5.95596
 
 [node name="Crew" type="Node2D"]
 position = Vector2( 340.088, 220.368 )
-scale = Vector2( 2, 2 )
+scale = Vector2( 3, 3 )
 script = ExtResource( 2 )
 Bullet_line = ExtResource( 3 )
 Blood_splatter = ExtResource( 6 )
@@ -52,6 +52,7 @@ one_shot = true
 visible = false
 modulate = Color( 1, 1, 1, 0.607843 )
 frames = ExtResource( 5 )
+frame = 1
 playing = true
 [connection signal="animation_finished" from="Crew_sprite" to="." method="_on_Crew_sprite_animation_finished"]
 [connection signal="area_shape_entered" from="Attack_range" to="Attack_range" method="_on_Attack_range_area_shape_entered"]

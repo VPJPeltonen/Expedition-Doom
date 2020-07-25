@@ -20,6 +20,10 @@ run/main_scene="res://Scenes/Main.tscn"
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
 config/icon="res://Sprites/logo.png"
 
+[autoload]
+
+GameData="*res://Scripts/GameData.gd"
+
 [display]
 
 window/size/width=1280

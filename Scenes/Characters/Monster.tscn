@@ -12,16 +12,18 @@ radius = 17.616
 radius = 3.95618
 height = 5.95596
 
-[node name="Monster" type="Node2D"]
+[node name="Monster" type="Node2D" groups=[
+"monster",
+]]
 position = Vector2( 803.109, 382.268 )
-scale = Vector2( 2, 2 )
+scale = Vector2( 3, 3 )
 script = ExtResource( 1 )
 Blood_splatter = ExtResource( 4 )
 
 [node name="Monster_sprite" type="AnimatedSprite" parent="."]
 z_index = 1
 frames = ExtResource( 2 )
-animation = "attack"
+animation = "inactive"
 playing = true
 
 [node name="Attack_range" type="Area2D" parent="."]

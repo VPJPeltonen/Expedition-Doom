@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/Sick_crewman.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Sprite Frames/sleep_spriteframes.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Scenes/Effects/Human_blood_splatter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Characters/dead_crew.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6.17975, 2.17297 )
+
+[node name="Sick_crewman" type="AnimatedSprite"]
+position = Vector2( 1594.28, 1435.72 )
+scale = Vector2( 3, 3 )
+frames = ExtResource( 2 )
+frame = 1
+playing = true
+script = ExtResource( 1 )
+Blood_splatter = ExtResource( 3 )
+Corpse = ExtResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="." groups=[
+"creature",
+"crew",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )

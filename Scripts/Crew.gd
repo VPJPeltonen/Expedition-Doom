@@ -31,8 +31,6 @@ func shoot():
 	if !shot_ready or current_target == null:
 		return
 			
-
-	
 	var bulletpath = PoolVector2Array()
 	if $Crew_sprite.scale.x == 1:
 		bulletpath.append(Vector2(-6,-1.5))
