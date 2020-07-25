@@ -2,6 +2,11 @@ extends Node2D
 
 export (PackedScene) var Bullet_line
 export (PackedScene) var Blood_splatter
+export (PackedScene) var Corpse
+
+export(Resource) var death_one
+export(Resource) var death_two
+export(Resource) var death_three
 
 var speed = 200.0
 var path = PoolVector2Array() setget set_path
@@ -9,6 +14,8 @@ var state = "default"
 var current_target
 var shot_ready = true
 var health = 3
+var attack_power = 1
+var work_speed = 20
 
 func _ready():
 	change_state("default")
@@ -49,8 +56,9 @@ func shoot():
 	b.global_position = global_position
 	b.show_line(bulletpath)
 	
-	current_target.damage(1)
+	current_target.damage(attack_power)
 	shot_ready = false
+	$Musket_sound.play()
 	$Reload_timer.start()
 
 func move_along_path(dist):
@@ -90,11 +98,15 @@ func enemy_in_range(enemy):
 		change_state("shoot")
 		
 func damage(damage_done):
+	if health <= 0:
+		return
 	var b = Blood_splatter.instance() 
 	get_parent().add_child(b)
 	b.global_position = global_position
 	health -= damage_done
 	if health <= 0:
+		$AudioStreamPlayer2D.set_stream(death_one)
+		$AudioStreamPlayer2D.play()
 		change_state("die")
 		
 func select(selected):
@@ -102,6 +114,13 @@ func select(selected):
 		$Select_Sprite.show()
 	else:
 		$Select_Sprite.hide()
+
+func in_work_range(site_in_range,delta):
+	if state == "default":
+		change_state("work")
+		site_in_range.add_work(delta*work_speed)
+	if state == "work":
+		site_in_range.add_work(delta*work_speed)
 
 func _on_Reload_timer_timeout():
 	shot_ready = true
@@ -120,4 +139,7 @@ func _on_Body_area_input_event(viewport, event, shape_idx):
 func _on_Crew_sprite_animation_finished():
 	if state == "die":
 		get_parent().crewman_dead(self)
+		var c = Corpse.instance() 
+		get_parent().get_parent().get_parent().get_parent().add_child(c)
+		c.global_position = global_position
 		queue_free()

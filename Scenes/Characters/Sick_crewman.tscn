@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Sick_crewman.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Sprite Frames/sleep_spriteframes.tres" type="SpriteFrames" id=2]
@@ -7,6 +7,9 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.17975, 2.17297 )
+
+[sub_resource type="OccluderPolygon2D" id=2]
+polygon = PoolVector2Array( -4.97638, 0.935883, 5.91852, 0.991577, 6.02991, -1.99667, -1.32001, -1.94095, -1.39423, -0.994385, -4.95782, -0.957275 )
 
 [node name="Sick_crewman" type="AnimatedSprite"]
 position = Vector2( 1594.28, 1435.72 )
@@ -25,3 +28,6 @@ Corpse = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 2 )

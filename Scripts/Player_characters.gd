@@ -19,7 +19,7 @@ func set_selected_character(character):
 
 func get_closest_character(from):
 	var closest_char
-	var dist = 3000.0
+	var dist = 3000000.0
 	for crewman in characters:
 		var temp_dist = from.global_position.distance_to(crewman.global_position)
 		if temp_dist < dist:
@@ -27,10 +27,10 @@ func get_closest_character(from):
 			closest_char = crewman
 	sick_characters = $Sick_crew.get_children()
 	for sick_crewman in sick_characters:
-		var temp_dist = from.global_position.distance_to(sick_crewman.global_position)
+		var temp_dist = from.global_position.distance_to(sick_crewman.global_position)+500
 		if temp_dist < dist:
 			dist = temp_dist
-			closest_char = sick_crewman		
+			closest_char = sick_crewman
 	return closest_char
 
 func wake_crewmen():

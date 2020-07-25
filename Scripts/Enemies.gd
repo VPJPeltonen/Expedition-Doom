@@ -10,8 +10,8 @@ onready var spawn_points = $Spawn_points.get_children()
 
 var monster_phase = false
 var rng = RandomNumberGenerator.new()
-var spawn_amounts = [2,3,3,5,5]
-var spawn_groups = [3,3,4,4,5]
+var spawn_amounts = [2,3,3,5,5,6,6,7,7]
+var spawn_groups = [4,4,5,5,6,6,7,7]
 
 func _process(delta):
 	if !monster_phase:

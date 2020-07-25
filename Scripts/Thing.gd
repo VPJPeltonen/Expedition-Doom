@@ -1,11 +1,12 @@
 extends Node2D
 
 export (PackedScene) var Blood_splatter
+export (PackedScene) var Corpse
 
 onready var pathfinding = get_parent().get_parent()
 
-var health = 2
-var attack_power = 0
+var health = 3
+var attack_power = 1
 var state
 var target
 var current_target
@@ -69,6 +70,7 @@ func damage(damage_done):
 	b.global_position = global_position
 	health -= damage_done
 	if health <= 0:
+		$DeathSound.play()
 		change_state("die")
 
 func set_path(value):
@@ -88,6 +90,9 @@ func change_state(new_state):
 func _on_Monster_sprite_animation_finished():
 	if state == "die":
 		get_parent().enemy_died(self)
+		var c = Corpse.instance() 
+		get_parent().get_parent().get_parent().get_parent().add_child(c)
+		c.global_position = global_position
 		queue_free()
 
 func _on_Reload_timer_timeout():
