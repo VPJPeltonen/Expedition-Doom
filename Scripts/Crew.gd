@@ -20,13 +20,19 @@ func _process(delta):
 		"walk":
 			var move_distance = speed * delta
 			move_along_path(move_distance)
-		"shoot":
-			shoot()
+		#"shoot":
+			#shoot()
+
+func _physics_process(delta):
+	if state == "shoot":
+		shoot()
 
 func shoot():
 	if !shot_ready or current_target == null:
 		return
-		
+			
+
+	
 	var bulletpath = PoolVector2Array()
 	if $Crew_sprite.scale.x == 1:
 		bulletpath.append(Vector2(-6,-1.5))
@@ -34,6 +40,12 @@ func shoot():
 		bulletpath.append(Vector2(6,-1.5))
 	bulletpath.append(current_target.global_position - global_position)
 	
+	var space_state = get_world_2d().direct_space_state
+	# use global coordinates, not local to node
+	var result = space_state.intersect_ray(global_position + bulletpath[0], current_target.global_position)	
+	if result:
+		return
+		
 	var b = Bullet_line.instance() 
 	get_parent().add_child(b)
 	b.global_position = global_position

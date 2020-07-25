@@ -4,7 +4,7 @@ export (PackedScene) var Blood_splatter
 
 onready var pathfinding = get_parent().get_parent()
 
-var health = 3
+var health = 2
 var state
 var target
 var current_target
@@ -20,6 +20,7 @@ func _process(delta):
 		"default":
 			target = get_parent().get_closest_target(self)
 			if target == null:
+				print("no target")
 				return
 			var new_path = pathfinding.get_AI_path(self,target)
 			set_path(new_path)

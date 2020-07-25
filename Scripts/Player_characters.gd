@@ -14,7 +14,7 @@ func set_selected_character(character):
 
 func get_closest_character(from):
 	var closest_char
-	var dist = 1000.0
+	var dist = 3000.0
 	for crewman in characters:
 		var temp_dist = from.global_position.distance_to(crewman.global_position)
 		if temp_dist < dist:
