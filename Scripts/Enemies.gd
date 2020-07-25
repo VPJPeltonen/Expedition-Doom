@@ -10,8 +10,8 @@ onready var spawn_points = $Spawn_points.get_children()
 
 var monster_phase = false
 var rng = RandomNumberGenerator.new()
-var spawn_amounts = [2,3,3,5]
-var spawn_groups = [3,3,4,4]
+var spawn_amounts = [2,3,3,5,5]
+var spawn_groups = [3,3,4,4,5]
 
 func _process(delta):
 	if !monster_phase:
@@ -27,7 +27,7 @@ func enemy_died(enemy):
 func get_closest_target(hunter):
 	return crewmen.get_closest_character(hunter)
 
-func _on_UI_start_game():
+func spawn_enemies():
 	var night = GameData.current_night
 	rng.randomize()
 	for i in range(0,spawn_groups[night]):
@@ -40,3 +40,9 @@ func _on_UI_start_game():
 			var offset = Vector2(rng.randi_range(-50,50),rng.randi_range(-50,50))
 			m.global_position = spawn_pos+offset
 	monster_phase = true
+	
+func _on_UI_start_game():
+	spawn_enemies()
+
+func _on_UI_night_time():
+	spawn_enemies()

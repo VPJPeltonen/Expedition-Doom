@@ -5,10 +5,11 @@ export (PackedScene) var Blood_splatter
 onready var pathfinding = get_parent().get_parent()
 
 var health = 2
+var attack_power = 0
 var state
 var target
 var current_target
-var speed = 150.0
+var speed = 100.0
 var path = PoolVector2Array() setget set_path
 var attack_ready = true
 
@@ -26,7 +27,6 @@ func _process(delta):
 			set_path(new_path)
 			change_state("walk")
 		"walk":
-			#var path = pathfinding.get_AI_path(self,target)
 			var move_distance = speed * delta
 			move_along_path(move_distance)
 		"attack":
@@ -38,19 +38,7 @@ func attack():
 	if current_target == null:
 		change_state("default")
 		return
-	#var bulletpath = PoolVector2Array()
-	#if $Crew_sprite.scale.x == 1:
-	#	bulletpath.append(Vector2(-6,-1.5))
-	#else:
-	#	bulletpath.append(Vector2(6,-1.5))
-	#bulletpath.append(current_target.global_position - global_position)
-	
-	#var b = Bullet_line.instance() 
-	#get_parent().add_child(b)
-	#b.global_position = global_position
-	#b.show_line(bulletpath)
-	
-	current_target.damage(1)
+	current_target.damage(attack_power)
 	attack_ready = false
 	$Reload_timer.start()
 			
@@ -105,3 +93,11 @@ func _on_Monster_sprite_animation_finished():
 func _on_Reload_timer_timeout():
 	attack_ready = true
 
+
+func _on_Path_timer_timeout():
+	target = get_parent().get_closest_target(self)
+	if target == null:
+		print("no target")
+		return
+	var new_path = pathfinding.get_AI_path(self,target)
+	set_path(new_path)

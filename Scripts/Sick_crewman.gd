@@ -4,7 +4,7 @@ export (PackedScene) var Blood_splatter
 export (PackedScene) var Corpse
 
 var rng = RandomNumberGenerator.new()
-var health = 1
+var health = 2
 var state 
 
 # Called when the node enters the scene tree for the first time.

@@ -43,7 +43,11 @@ shape = SubResource( 2 )
 
 [node name="Reload_timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Path_timer" type="Timer" parent="."]
+wait_time = 0.5
 [connection signal="animation_finished" from="Monster_sprite" to="." method="_on_Monster_sprite_animation_finished"]
 [connection signal="area_shape_entered" from="Attack_range" to="Attack_range" method="_on_Attack_range_area_shape_entered"]
 [connection signal="area_shape_exited" from="Attack_range" to="Attack_range" method="_on_Attack_range_area_shape_exited"]
 [connection signal="timeout" from="Reload_timer" to="." method="_on_Reload_timer_timeout"]
+[connection signal="timeout" from="Path_timer" to="." method="_on_Path_timer_timeout"]
