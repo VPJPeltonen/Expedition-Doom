@@ -53,6 +53,7 @@ one_shot = true
 
 [node name="Path_timer" type="Timer" parent="."]
 wait_time = 0.5
+autostart = true
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )

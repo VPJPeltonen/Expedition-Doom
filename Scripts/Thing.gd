@@ -13,8 +13,10 @@ var current_target
 var speed = 100.0
 var path = PoolVector2Array() setget set_path
 var attack_ready = true
+var lights_in_range = []
 
 func _ready():
+	$Path_timer.set_wait_time(get_parent().rng.randf_range(0.3,0.6))
 	change_state("default")
 
 func _process(delta):
@@ -68,6 +70,9 @@ func damage(damage_done):
 	var b = Blood_splatter.instance() 
 	get_parent().add_child(b)
 	b.global_position = global_position
+	if !lights_in_range.empty():
+		damage_done += damage_done
+	print(damage_done)
 	health -= damage_done
 	if health <= 0:
 		$DeathSound.play()

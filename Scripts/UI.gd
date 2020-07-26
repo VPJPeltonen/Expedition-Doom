@@ -16,7 +16,7 @@ func _ready():
 
 func _process(delta):
 	if day_stage:
-		day_progress += delta*20
+		day_progress += delta*10
 		$ActionUI/Day_meter/ProgressBar.value = day_progress
 		if day_progress >= 100:
 			#GameData.current_night += 1
@@ -77,3 +77,12 @@ func _on_Continue_button_pressed():
 
 func _on_Torch_build_pressed():
 	emit_signal("build_mode","torch")
+
+
+func _on_Player_characters_player_loses():
+	$Start_view.show()
+	$Start_view/Opening_text.hide()
+	$Start_view/Morning1_text.hide()
+	$Start_view/Generic_text.hide()
+	$Start_view/Continue_button.hide()
+	$"Start_view/Lose Screen".show()

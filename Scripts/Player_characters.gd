@@ -1,5 +1,7 @@
 extends Node2D
 
+signal player_loses
+
 onready var selected_character = $Crew
 onready var characters = [$Crew,$Crew2,$Crew3]
 onready var sick_characters = $Sick_crew.get_children()
@@ -10,6 +12,10 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	selected_character.select(true)
+
+func _process(delta):
+	if characters.size() == 0:
+		emit_signal("player_loses")
 
 func set_selected_character(character):
 	selected_character = character
@@ -27,7 +33,7 @@ func get_closest_character(from):
 			closest_char = crewman
 	sick_characters = $Sick_crew.get_children()
 	for sick_crewman in sick_characters:
-		var temp_dist = from.global_position.distance_to(sick_crewman.global_position)+500
+		var temp_dist = from.global_position.distance_to(sick_crewman.global_position)
 		if temp_dist < dist:
 			dist = temp_dist
 			closest_char = sick_crewman
